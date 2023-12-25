@@ -39,3 +39,60 @@ spec:
     message ExampleMessage {
       string example = 1;
     };
+
+---
+---
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: broker-1
+  namespace: namespace-1
+spec:
+  owner: knative
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-component
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: dev.knative.apiserver.resource.add
+  namespace: namespace-1
+spec:
+  type: eventTypeGroup
+  lifecycle: dev
+  owner: knative
+  system: broker-1
+  providesApis:
+    - api:namespace-1/59806c5b3f0c47ef00056a3f80a07c4f
+    - api:namespace-1/69806c5b3f0c47ef00056a3f80a07c4f
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: 59806c5b3f0c47ef00056a3f80a07c4f
+  namespace: namespace-1
+  title: "dev.knative.apiserver.resource.add - (namespace-1/59806c5b3f0c47ef00056a3f80a07c4f)"
+  description: "ApiServerResourceAdd is the event published when a resource is added to the API server."
+spec:
+  type: eventType
+  lifecycle: dev
+  owner: knative
+  system: broker-1
+  definition: |
+    foo bar
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: 69806c5b3f0c47ef00056a3f80a07c4f
+  namespace: namespace-1
+  title: "dev.knative.apiserver.resource.add - (namespace-1/69806c5b3f0c47ef00056a3f80a07c4f)"
+  description: "ApiServerResourceAdd is the event published when a resource is added to the API server."
+spec:
+  type: eventType
+  lifecycle: dev
+  owner: knative
+  system: broker-1
+  definition: |
+    foo bar
